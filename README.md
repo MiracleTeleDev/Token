@@ -1,0 +1,1 @@
+# MiracleTeleToken contract
