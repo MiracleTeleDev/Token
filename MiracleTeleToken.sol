@@ -24,7 +24,7 @@ contract MiracleTeleToken is ERC20Token, Owned {
     /**
 	 * Initializes contract with initial supply tokens to the creator of the contract
 	 */
-    function MiracleTeleToken(uint256 _supply) ERC20Token(_supply, "MiracleTele", "TELE") public {}
+    constructor(uint256 _supply) ERC20Token(_supply, "MiracleTele", "TELE") public {}
 
 	/**
 	 * Mint new tokens
@@ -88,7 +88,7 @@ contract MiracleTeleToken is ERC20Token, Owned {
         public
         returns(bytes32 signHash)
     {
-        signHash = keccak256("\x19Ethereum Signed Message:\n20", _message);
+        signHash = keccak256(abi.encodeWithSignature("\x19Ethereum Signed Message:\n20", _message));
     }
 
     /**

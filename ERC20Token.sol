@@ -12,7 +12,7 @@ contract ERC20Token {
     // This creates an array with all balances
     mapping (address => uint256) public balances;
 
-	// Mapping for allowance
+    // Mapping for allowance
     mapping (address => mapping (address => uint256)) public allowed;
 
     // This generates a public event on the blockchain that will notify clients
@@ -21,20 +21,20 @@ contract ERC20Token {
     // This generates a public event on the blockchain that will notify clients
     event Approval(address indexed sender, address indexed spender, uint256 value);
 
-	function ERC20Token(uint256 _supply, string _name, string _symbol)
-		public
-	{
-		//initial mint
+    constructor(uint256 _supply, string _name, string _symbol)
+	public
+    {
+	//initial mint
         totalSupply = _supply * 10**uint256(decimals);
         balances[msg.sender] = totalSupply;
 
-		//set variables
-		name=_name;
-		symbol=_symbol;
+	//set variables
+	name=_name;
+	symbol=_symbol;
 
-    	//trigger event
+	//trigger event
         emit Transfer(0x0, msg.sender, totalSupply);
-	}
+    }
 
 	/**
 	 * Returns current tokens total supply
