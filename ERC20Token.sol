@@ -36,18 +36,18 @@ contract ERC20Token {
         emit Transfer(0x0, msg.sender, totalSupply);
     }
 
-	/**
-	 * Returns current tokens total supply
-	 */
+    /**
+     * Returns current tokens total supply
+     */
     function totalSupply()
     	public
     	constant
     	returns (uint256)
     {
-		return totalSupply;
+	return totalSupply;
     }
 
-	/**
+    /**
      * Get the token balance for account `tokenOwner`
      */
     function balanceOf(address _owner)
@@ -58,7 +58,7 @@ contract ERC20Token {
         return balances[_owner];
     }
 
-	/**
+    /**
      * Set allowance for other address
      *
      * Allows `_spender` to spend no more than `_value` tokens on your behalf
@@ -70,19 +70,19 @@ contract ERC20Token {
     	public
     	returns (bool success)
     {
-		// To change the approve amount you first have to reduce the addresses`
+	// To change the approve amount you first have to reduce the addresses`
         //  allowance to zero by calling `approve(_spender,0)` if it is not
         //  already 0 to mitigate the race condition described here:
         //  https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
-		require((_value == 0) || (allowed[msg.sender][_spender] == 0));
+	require((_value == 0) || (allowed[msg.sender][_spender] == 0));
 
       	//set allowance
       	allowed[msg.sender][_spender] = _value;
 
-		//trigger event
+	//trigger event
       	emit Approval(msg.sender, _spender, _value);
 
-		return true;
+	return true;
     }
 
     /**
@@ -96,15 +96,15 @@ contract ERC20Token {
         return allowed[_owner][_spender];
     }
 
-	/**
+    /**
      * Internal transfer, only can be called by this contract
      */
     function _transfer(address _from, address _to, uint256 _value)
     	internal
     	returns (bool success)
     {
-		// Do not allow transfer to 0x0 or the token contract itself or from address to itself
-		require((_to != address(0)) && (_to != address(this)) && (_to != _from));
+	// Do not allow transfer to 0x0 or the token contract itself or from address to itself
+	require((_to != address(0)) && (_to != address(this)) && (_to != _from));
 
         // Check if the sender has enough
         require((_value > 0) && (balances[_from] >= _value));
@@ -123,7 +123,7 @@ contract ERC20Token {
         return true;
     }
 
-	/**
+    /**
       * Transfer tokens
       *
       * Send `_value` tokens to `_to` from your account
@@ -138,7 +138,7 @@ contract ERC20Token {
     	return _transfer(msg.sender, _to, _value);
     }
 
-  	/**
+    /**
      * Transfer tokens from other address
      *
      * Send `_value` tokens to `_to` on behalf of `_from`
@@ -151,11 +151,11 @@ contract ERC20Token {
     	public
     	returns (bool success)
     {
-		// Check allowance
+	// Check allowance
     	require(_value <= allowed[_from][msg.sender]);
 
-		//decrement allowance
-		allowed[_from][msg.sender] -= _value;
+	//decrement allowance
+	allowed[_from][msg.sender] -= _value;
 
     	//transfer tokens
         return _transfer(_from, _to, _value);

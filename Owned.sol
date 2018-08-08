@@ -1,13 +1,14 @@
 pragma solidity ^0.4.16;
 
 contract Owned {
-	address public owner;
-	address public signer;
+    
+    address public owner;
+    address public signer;
 
-	constructor() public {
-		owner = msg.sender;
-		signer = msg.sender;
-	}
+    constructor() public {
+	owner = msg.sender;
+	signer = msg.sender;
+    }
 
     modifier onlyOwner {
     	require(msg.sender == owner);

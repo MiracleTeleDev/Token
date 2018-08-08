@@ -14,9 +14,7 @@ contract CrowdSaleTeleToken is Owned {
     ERC20Token public crowdSaleToken;
 
     /**
-     * Constructor function
-     *
-     * Setup the owner
+     * Constructor function, setup token
      */
     constructor(uint256 _price, address _tokenAddress)
     	public
@@ -34,17 +32,17 @@ contract CrowdSaleTeleToken is Owned {
      * The function without name is the default function that is called whenever anyone sends funds to a contract
      */
     function ()
-    	payableты
+    	payable
     	public
     {
         //calc buy amount
-		uint256 amount = msg.value / price;
+	uint256 amount = msg.value / price;
 
-		//check amount, it cannot be zero
-		require(amount != 0);
+	//check amount, it cannot be zero
+	require(amount != 0);
 
         //transfer required amount
-		crowdSaleToken.transfer(msg.sender, amount.mul(10**uint256(crowdSaleToken.decimals)));
+	crowdSaleToken.transfer(msg.sender, amount.mul(10**uint256(crowdSaleToken.decimals)));
     }
 
     /**
@@ -58,17 +56,17 @@ contract CrowdSaleTeleToken is Owned {
     	msg.sender.transfer(_amount);
     }
 
-	/**
-	 * Set token price
-	 */
+    /**
+     * Set token price
+     */
     function setPrice(uint256 _price)
     	public
     	onlyOwner
     {
-		//check new price, it cannot be zero
-		assert(_price != 0);
+	//check new price, it cannot be zero
+	assert(_price != 0);
 
-		//set new crowdsale token price
-		price = _price;
+	//set new crowdsale token price
+	price = _price;
     }
 }
